@@ -4,6 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+
+var dbConnection = mongoose.connection;
+dbConnection.on('error', console.error.bind(console, 'Connection Error:'));
+dbConnection.once('open', function () {
+    console.log('Database connected.....')
+});
+
+
+mongoose.connect('mongodb://localhost/DroneCommDB');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
