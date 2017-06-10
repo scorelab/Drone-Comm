@@ -16,6 +16,8 @@ dbConnection.once('open', function () {
 
 mongoose.connect('mongodb://localhost/DroneCommDB');
 
+var authroute = require('./app/route/authenticateRoute');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -33,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/apis', authroute);
 app.use('/', index);
 app.use('/users', users);
 
