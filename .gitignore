@@ -64,6 +64,7 @@ typings/
 
 # IntelliJ project files
 .idea
-*.iml
+*.imlgi
 out
 gen
+.DS_Store
