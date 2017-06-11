@@ -5,10 +5,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var profileSchema = new Schema({
     username : String,
-    name : String,
+    first_Name : String,
+    last_Name : String,
     address : String,
     contact_No : String,
     email : String,
