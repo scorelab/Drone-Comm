@@ -15,7 +15,7 @@ authenticationService.login = function (name, password, callback) {
         console.log(err, user);
         if (err) {
             return callback(new droneCommServiceError("Database Connection Error", err));
-        } else if ( user && user.password != password){
+        } else if ( user && user.password == password){
             var token = authenticationFilter.createToken({name : user.name, password: user.password});
             var response = {
                 token: token
