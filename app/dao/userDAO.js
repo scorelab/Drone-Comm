@@ -2,7 +2,7 @@
  * @author Amila Karunathilaka
  */
 
-var User =require('../model/user');
+var User =require('../model/dbmodel/user');
 
 userDAO = {};
 
