@@ -35,24 +35,34 @@ authenticationService.register = function (resources, callback) {
         error.status = 400;
         return callback(error);
     }
-    userDAO.insert(resources.user, function (err, user) {
+    userDAO.insert(resources.user, function (err) {
         if (err) {
+            console.log(err);
             return callback(new droneCommServiceError("Database Connection Error", err));
         }
-
-        resources.profile.userId = user._id;
-        profileDAO.insert(resources.profile, function (err) {
+        userDAO.getUser(resources.user.name, function (err, user) {
+            console.log(user);
             if (err) {
-                err = userDAO.remove(resources.user.name, function () {
+                userDAO.remove(resources.user.name, function (err) {
                     if (err) {
                         return callback(new droneCommServiceError("Database Connection Error", err));
                     }
                 });
                 return callback(new droneCommServiceError("Database Connection Error", err));
             }
-            callback(null, {success: true});
+            resources.profile.userId = user._id;
+            profileDAO.insert(resources.profile, function (err) {
+                if (err) {
+                    userDAO.remove(resources.user.name, function (err) {
+                        if (err) {
+                            return callback(new droneCommServiceError("Database Connection Error", err));
+                        }
+                    });
+                    return callback(new droneCommServiceError("Database Connection Error", err));
+                }
+                callback(null, {success: true});
+            });
         });
-
     });
 } ;
 

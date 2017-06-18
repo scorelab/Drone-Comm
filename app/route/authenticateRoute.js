@@ -24,7 +24,7 @@ router.post('/register', function (req, res, next) {
             return next(err);
         }
         res.send(response);
-    })
-})
+    });
+});
 
 module.exports = router;
