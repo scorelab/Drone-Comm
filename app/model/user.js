@@ -11,6 +11,22 @@ var userSchema = new Schema({
     roles : [String]
 });
 
+/**
+ * username duplicate validation
+ */
+userSchema.pre("save", function (next) {
+   var self = this;
+    mongoose.models["user"].findOne({name: self.name}, function (err, user) {
+        if (err) {
+            next(err);
+        } else if (user) {
+            self.invalidate("username", "username currently available");
+            next(new Error("username currently available"));
+        }
+        next();
+    });
+});
+
 var user = mongoose.model("user", userSchema);
 
 module.exports = user;
