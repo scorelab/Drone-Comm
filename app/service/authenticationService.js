@@ -30,17 +30,17 @@ authenticationService.login = function (name, password, callback) {
 };
 
 authenticationService.register = function (resources, callback) {
-    if ( !resources || !resources.user ||!resources.profile ||
-        resources.isEmpty() || resources.user.isEmpty() || resources.profile.isEmpty) {
+    if ( !resources || !resources.user ||!resources.profile) {
         var error = new droneCommServiceError('Bad Request...');
         error.status = 400;
         return callback(error);
     }
-    userDAO.insert(resources.user, function (err) {
+    userDAO.insert(resources.user, function (err, user) {
         if (err) {
             return callback(new droneCommServiceError("Database Connection Error", err));
         }
 
+        resources.profile.userId = user._id;
         profileDAO.insert(resources.profile, function (err) {
             if (err) {
                 err = userDAO.remove(resources.user.name, function () {

@@ -9,7 +9,12 @@ userDAO = {};
 userDAO.insert = function (userData, callback) {
     var userObj = new User(userData);
     userObj.save(function (err) {
-        callback(err);
+        if (err) {
+            callback(err);
+        }
+        userDAO.getUser(userData.name, function (err, user) {
+            callback(err, user);
+        })
     });
 };
 
