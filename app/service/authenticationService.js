@@ -50,7 +50,7 @@ authenticationService.register = function (resources, callback) {
                 });
                 return callback(new droneCommServiceError("Database Connection Error", err));
             }
-            resources.profile.userId = user._id;
+            resources.profile.user = user._id;
             profileDAO.insert(resources.profile, function (err) {
                 if (err) {
                     userDAO.remove(resources.user.name, function (err) {

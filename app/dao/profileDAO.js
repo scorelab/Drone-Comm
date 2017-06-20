@@ -13,4 +13,12 @@ profileDAO.insert = function (profile, callback) {
     })
 };
 
+
+profileDAO.findByUserName = function (username, callback) {
+    console.warn(username);
+    Profile.find().populate({path:'user', match: {name: username}}).exec(function (err, profile) {
+        callback(err, profile);
+    });
+};
+
 module.exports = profileDAO;
