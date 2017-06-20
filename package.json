@@ -1,5 +1,5 @@
 {
-  "name": "drone-comm-rest-api",
+  "name": "drone-comm",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,9 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.10.4",
+    "mongoose-double": "0.0.1",
     "morgan": "~1.8.1",
+    "promise": "^7.3.0",
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
