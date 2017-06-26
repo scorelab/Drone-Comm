@@ -1,0 +1,64 @@
+<div class="ui big blue menu inverted" id="top-menu">
+  <a sm-item icon="sidebar big"></a>
+  <div class="item">
+    <span id="product-name"><h2>Drone Community</h2></span>
+    <img src="../../../assets/images/droneComm-logo.png"/>
+  </div>
+
+  <div class="right menu" [style.display]="tokenService.hasToken() ? block : none">
+  <!--  <div class="ui item floating dropdown button" #dropdown>
+      <a>{{tokenService.getUserName()}}</a>
+      <div class="menu">
+        <div class="item ui button" (click)="changeUserSetting()">
+          <i class="user icon"></i> Setting
+        </div>
+        <div class="item ui button" (click)="doLogOut()">
+          <i class="sign out icon"></i> Sign Out
+        </div>
+      </div>
+    </div>-->
+    <div class="item" (click)="doLogOut()" *ngIf="tokenService.hasToken()">
+      <button class="ui button negative" type="submit">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="ui bottom attached segment grid absolute-position" id="main-content-segment">
+  <div class="ui row" id="main-content-row">
+    <div class="sixteen wide column absolute-position" id="main-content-column">
+-->
+
+      <!--<sm-sidebar class="left vertical inverted sidebar labeled icon menu no-padding absolute-position"
+                  id="im-menu" #invertedSidebar>
+
+        <sm-accordion [options]="{exclusive: true, on: 'click'}" class="inverted">
+          <div *ngFor="let menuItem of getMenuItems()" class="main-menu-item">
+            <a *ngIf="!menuItem.hasSubMenu()" class="title item"
+               routerLink="{{menuItem.routerPath}}" routerLinkActive="active">
+              <i class="{{menuItem.iconName}} icon"></i> {{menuItem.displayName}}
+            </a>
+
+            <a *ngIf="menuItem.hasSubMenu()" class="title item">
+              <i class="{{menuItem.iconName}} icon"></i> {{menuItem.displayName}}
+            </a>
+            <div *ngIf="menuItem.hasSubMenu()" class="content">
+              <a class="item" *ngFor="let subItem of menuItem.subMenuItems"
+                 routerLink="{{subItem.routerPath}}" routerLinkActive="active">
+                {{subItem.displayName}}
+              </a>
+            </div>
+          </div>
+        </sm-accordion>
+
+      </sm-sidebar>-->
+      <div class="ui basic segment pusher absolute-position" id="page-content">
+        <router-outlet></router-outlet>
+      </div>
+<!--
+    </div>
+  </div>
+</div>
+-->
