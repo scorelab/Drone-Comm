@@ -13,13 +13,14 @@ dbConnection.once('open', function () {
     console.log('Database connected.....')
 });
 
+mongoose.connect('mongodb://localhost:27017/DroneCommDB');
 
-mongoose.connect('mongodb://localhost/DroneCommDB');
+var authenticationFilter = require('./app/util/auth/authenticationFilter');
+var authRoute = require('./app/route/authenticateRoute');
+var profileRoute = require('./app/route/profileRoute');
 
-var authroute = require('./app/route/authenticateRoute');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
+// var index = require('./routes/index');
+// var users = require('./routes/users');
 
 var app = express();
 
@@ -35,9 +36,42 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/apis', authroute);
-app.use('/', index);
-app.use('/users', users);
+//Enable cross-origin resource sharing
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With'); // Origin, X-Requested-With, Content-Type, Accept, Authorization
+    res.setHeader('Access-Contrl-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Max-Age', '86400'); // important
+
+    if (req.method === 'OPTIONS' ) {
+        console.log('OPTIONS SUCCESS');
+        res.end("ok");
+        //res.end();
+    } else {
+        next();
+    }
+})
+
+app.use('/apis', authRoute);
+
+app.use(function (req, res, next) {
+    var token = req.body.token || req.query.token || req.header['authorization'];
+    authenticationFilter.verifyToken(token, function (err, response) {
+        if (err) {
+          return next(err);
+        } else if (response.success) {
+          req.decoded = response.decoded;
+          next();
+        } else {
+          return res.json(response);
+        }
+
+    });
+});
+
+app.use('/profile', profileRoute);
+//app.use('/', index);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
