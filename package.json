@@ -1,0 +1,27 @@
+{
+  "name": "drone-comm",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": "https://github.com/scorelab/Drone-Comm",
+  "author": "scorelab",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^7.4.1",
+    "mongoose": "^4.10.4",
+    "mongoose-double": "0.0.1",
+    "morgan": "~1.8.1",
+    "promise": "^7.3.0",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.1.1"
+  }
+}
