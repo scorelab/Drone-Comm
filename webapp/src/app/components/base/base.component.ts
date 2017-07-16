@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {JwtService} from "../../services/jwt.service";
 /**
  * @author Amila Karunathilaka
  */
@@ -9,4 +10,11 @@ import {Component} from "@angular/core";
 })
 export class BaseComponent {
   title = 'Drone Communnity';
+
+  constructor(){
+  }
+
+  hasToken() {
+    return JwtService.hasToken();
+  }
 }

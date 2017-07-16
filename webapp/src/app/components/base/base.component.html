@@ -5,7 +5,7 @@
     <img src="../../../assets/images/droneComm-logo.png"/>
   </div>
 
-  <div class="right menu" [style.display]="tokenService.hasToken() ? block : none">
+  <div class="right menu" [style.display]="hasToken() ? block : none">
   <!--  <div class="ui item floating dropdown button" #dropdown>
       <a>{{tokenService.getUserName()}}</a>
       <div class="menu">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>-->
-    <div class="item" (click)="doLogOut()" *ngIf="tokenService.hasToken()">
+    <div class="item" (click)="doLogOut()" *ngIf="hasToken()">
       <button class="ui button negative" type="submit">
         Sign Out
       </button>
