@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, ViewContainerRef} from "@angular/core";
 import {JwtService} from "../../services/jwt.service";
+import {ToastsManager} from "ng2-toastr";
 /**
  * @author Amila Karunathilaka
  */
@@ -11,7 +12,8 @@ import {JwtService} from "../../services/jwt.service";
 export class BaseComponent {
   title = 'Drone Communnity';
 
-  constructor(){
+  constructor(private toastr: ToastsManager, vcr: ViewContainerRef){
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   hasToken() {
