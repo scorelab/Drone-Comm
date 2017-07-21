@@ -31,16 +31,21 @@ emailVerificationTokenService.createToken = function (userId, callback) {
 };
 
 emailVerificationTokenService.verifyToken = function (token, callback) {
-    emailVerificationTokenDAO.getToken(verificationToken, function (err, verificationToken) {
+    emailVerificationTokenDAO.getToken(token, function (err, verificationToken) {
         if (err) {
             return callback(new droneCommServiceError("Database Connection Error", err));
         }
-        userService.activeUser(verificationToken.userId, function (err, success) {
-            if (err) {
-                return callback(err);
-            }
-            callback(null);
-        });
+
+        if (verificationToken.expiredDate >= Date.now()) {
+            userService.activeUser(verificationToken.userId, function (err, success) {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, {success: true});
+            });
+        } else {
+            callback(new droneCommServiceError("Verification token is expired.."));
+        }
     });
 };
 

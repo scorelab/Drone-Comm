@@ -15,13 +15,13 @@ emailVerificationTokenDAO.insert = function (token, callback) {
 
 
 emailVerificationTokenDAO.getToken = function (token, callback) {
-    EmailVerificationToken.findOne({token:token}, function (err, verificationToken) {
+    EmailVerificationToken.findOne({token: token}, function (err, verificationToken) {
         callback(err, verificationToken);
     })
 };
 
 emailVerificationTokenDAO.getTokenByUserId = function (userId, callback) {
-    EmailVerificationToken.findOne({userId:userId}, function (err, verificationToken) {
+    EmailVerificationToken.findOne({userId: userId}, function (err, verificationToken) {
         callback(err, verificationToken);
     })
 };
