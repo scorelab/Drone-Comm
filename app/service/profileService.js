@@ -8,6 +8,15 @@ var profileDAO = require('../dao/profileDAO');
 
 profileService = {};
 
+profileService.insertProfile = function (profile, callback) {
+    profileDAO.insert(profile, function (err) {
+        if (err) {
+            return callback(new droneCommServiceError("Database Connection Error", err));
+        }
+        callback(null, {success: true});
+    });
+};
+
 profileService.getProfileByUsername = function(username, callback){
     profileDAO.findByUserName(username, function (err, profile) {
         console.log(err, profile);
@@ -20,6 +29,15 @@ profileService.getProfileByUsername = function(username, callback){
     })
 };
 
+profileService.removeProfile = function (userId, callback) {
+    profileDAO.remove(userId, function (err) {
+        if (err) {
+            return callback(new droneCommServiceError("Database Connection Error", err));
+        }
+        callback(null, {success: true});
+    });
+}
+
 /*profileService.updateProfile = function (username, profile, callback) {
 
 };*/
@@ -31,8 +49,5 @@ profileService.registerAsAPilot = function (username, callback) {
         }
     })
 };
-
-
-
 
 module.exports = profileService;
