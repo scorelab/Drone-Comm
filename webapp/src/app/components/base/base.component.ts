@@ -1,6 +1,7 @@
 import {Component, ViewContainerRef} from "@angular/core";
 import {JwtService} from "../../services/jwt.service";
 import {ToastsManager} from "ng2-toastr";
+import {AuthService} from "../../services/auth.service";
 /**
  * @author Amila Karunathilaka
  */
@@ -18,5 +19,9 @@ export class BaseComponent {
 
   hasToken() {
     return JwtService.hasToken();
+  }
+
+  doLogOut(){
+    AuthService.logout();
   }
 }
