@@ -1,5 +1,16 @@
 <div class="ui container">
-  <drone-comm-resend-verification (okBtnClick)="navigate()" (resendBtnClick)="navigate()" #resendVerifyEmailModal></drone-comm-resend-verification>
+  <div class="ui row no-padding as2g-header-row">
+    <div class="six wide column">
+      <h1 class="ui header page-header">User Registration</h1>
+    </div>
+  </div>
+  <div class="ui row no-padding">
+    <div class="sixteen wide column">
+      <div class="ui divider"></div>
+    </div>
+  </div>
+  <drone-comm-resend-verification (okBtnClick)="navigate()" (resendBtnClick)="resendEmailVerification()"
+                                  #resendVerifyEmailModal></drone-comm-resend-verification>
   <form class="ui form" id="contact_form" method="post" role="form" (ngSubmit)="register()">
     <div class="fields">
       <div class="eight wide field">
@@ -49,7 +60,12 @@
         <input type="text" id="email" placeholder="XXXX@XXX.com" [(ngModel)]="profile.email" name="email"/>
       </div>
     </div>
-    <p></p>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden">
+        <label>I agree to the Terms and Conditions</label>
+      </div>
+    </div>
     <button type="submit" class="ui inverted teal button">Submit</button>
   </form>
 </div>

@@ -52,6 +52,10 @@ export class RegisterComponent implements OnInit{
     this.resendVerifyEmailModal.showModal();
   }
 
+  resendEmailVerification(){
+    this.userService.resendEmailVerification(this.user.name);
+  }
+
   navigate() {
     this.resendVerifyEmailModal.hideModal();
     this.router.navigate([this.returnUrl]);
