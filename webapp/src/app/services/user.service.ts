@@ -32,4 +32,8 @@ export class UserService {
     contentHeader.append("Content-Type", "application/json");
     return this.http.get(this.utilService.getBaseUrl("verify"), requestOptionArgs);
   }
+
+  resendEmailVerification(name: string) {
+    return this.http.get(this.utilService.getResourceUrl("resend", name));
+  }
 }
