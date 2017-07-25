@@ -53,7 +53,7 @@ router.get('/resend/:name', function (req, res, next) {
             }
 
             var resp = {
-                msg : 'Successfully registered user',
+                msg : 'Successfully resend email verification',
                 errorCode:  0
             };
             res.send(resp);
