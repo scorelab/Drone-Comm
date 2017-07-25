@@ -64,7 +64,7 @@ emailVerificationTokenService.resendToken = function (username, callback) {
                }
                 callback(null, {
                     token: token,
-                    email: resources.profile.email
+                    email: profile.email
                 });
             });
         });

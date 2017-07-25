@@ -36,7 +36,7 @@ profileService.removeProfile = function (userId, callback) {
         }
         callback(null, {success: true});
     });
-}
+};
 
 /*profileService.updateProfile = function (username, profile, callback) {
 
