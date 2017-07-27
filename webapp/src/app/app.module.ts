@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -14,29 +14,45 @@ import {AuthGuard} from "./components/auth/guards/auth.guard";
 import {LoginGuard} from "./components/auth/guards/login.guard";
 import {BaseComponent} from "./components/base/base.component";
 import { RegisterComponent } from './components/register/register.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastModule, ToastsManager} from "ng2-toastr";
+import {RegisterVerificationComponent} from "./components/register/resendverification/register.verification.component";
+import {NgSemanticModule} from "ng-semantic/ng-semantic";
+import {VerifyComponent} from "./components/register/verify/verify.component";
+import {UserService} from "./services/user.service";
+import {DroneCreateComponent} from "./components/drone/create/drone.create.component";
 
 @NgModule({
   declarations: [
     BaseComponent,
     AppComponent,
     LoginComponent,
-   // RegisterComponent,
+    RegisterComponent,
+    RegisterVerificationComponent,
+    VerifyComponent,
+    //DroneCreateComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgSemanticModule,
+    BrowserAnimationsModule,
+    ToastModule.forRoot()
   ],
   providers: [
     AuthService,
     JwtService,
     RestService,
     UtilService,
+    UserService,
+    ToastsManager,
     AuthGuard,
-    LoginGuard
+    LoginGuard,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [BaseComponent]
 })
 export class AppModule { }

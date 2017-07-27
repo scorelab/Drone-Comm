@@ -18,8 +18,10 @@
     "mongoose": "^4.10.4",
     "mongoose-double": "0.0.1",
     "morgan": "~1.8.1",
+    "nodemailer": "^4.0.1",
     "promise": "^7.3.0",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "@angular/cli": "^1.1.1"

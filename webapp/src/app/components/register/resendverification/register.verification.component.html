@@ -1,0 +1,7 @@
+<sm-modal title="{{confirmModalTitle}}" class="as2g-confirm-modal" #confirmModal>
+  <modal-content>{{confirmModalContent}}</modal-content>
+  <modal-actions>
+    <div class="ui button small positive" (click)="onOkBtnClick()">{{okBtnText}}</div>
+    <div class="ui button small" (click)="onResendBtnClick()">{{resendBtnText}}</div>
+  </modal-actions>
+</sm-modal>

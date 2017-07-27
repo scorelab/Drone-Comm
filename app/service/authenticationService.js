@@ -8,6 +8,10 @@ var userDAO = require('../dao/userDAO');
 var profileDAO = require('../dao/profileDAO');
 var authenticationFilter = require('../util/auth/authenticationFilter');
 
+const profileService = require('./profileService');
+const userService = require('./userService');
+const emailVerificationToken = require('./emailVerificationTokenService');
+
 authenticationService = {};
 
 authenticationService.login = function (name, password, callback) {
@@ -30,40 +34,62 @@ authenticationService.login = function (name, password, callback) {
 };
 
 authenticationService.register = function (resources, callback) {
-    if ( !resources || !resources.user ||!resources.profile) {
+    if ( !resources || !resources.user) {
         var error = new droneCommServiceError('Bad Request...');
         error.status = 400;
         return callback(error);
     }
-    userDAO.insert(resources.user, function (err) {
+    userService.insertUser(resources.user, function (err, successUser) {
         if (err) {
-            console.log(err);
-            return callback(new droneCommServiceError("Database Connection Error", err));
+            return callback(err);
         }
-        userDAO.getUser(resources.user.name, function (err, user) {
-            console.log(user);
+        userService.getUser(resources.user.name, function (err, user) {
             if (err) {
-                userDAO.remove(resources.user.name, function (err) {
+                userService.removeUser(resources.user.name, function (err, success) {
                     if (err) {
-                        return callback(new droneCommServiceError("Database Connection Error", err));
+                        return callback(err);
                     }
                 });
-                return callback(new droneCommServiceError("Database Connection Error", err));
+                return callback(err);
             }
-            resources.profile.user = user._id;
-            profileDAO.insert(resources.profile, function (err) {
+            resources.user = user._id;
+            profileService.insertProfile(resources, function (err, successProfile) {
                 if (err) {
-                    userDAO.remove(resources.user.name, function (err) {
+                    userService.removeUser(resources.user.name, function (err, success) {
                         if (err) {
-                            return callback(new droneCommServiceError("Database Connection Error", err));
+                            return callback(err);
                         }
                     });
-                    return callback(new droneCommServiceError("Database Connection Error", err));
+                    return callback(err);
                 }
-                callback(null, {success: true});
+
+                emailVerificationToken.createToken(user._id, function (err, token) {
+                    if (err) {
+                        profileService.removeProfile(user._id, function (err, success) {
+                                userService.removeUser(resources.user.name, function (err, success) {
+                                    if (err) {
+                                        return callback(err);
+                                    }
+                                });
+                                if (err) {
+                                    return callback(err);
+                                }
+                        });
+                        return callback(err);
+                    }
+
+                    callback(null,
+                        {
+                            success: (successUser.success && successProfile.success),
+                            token: token,
+                            email: resources.email
+                        });
+
+                });
             });
         });
     });
-} ;
+};
+
 
 module.exports = authenticationService;

@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     name : String,
     password : String,
+    active: Boolean,
     roles : [String]
 });
 
@@ -19,7 +20,7 @@ userSchema.pre("save", function (next) {
     mongoose.models["user"].findOne({name: self.name}, function (err, user) {
         if (err) {
             next(err);
-        } else if (user) {
+        }  else if (user && !user._id.equals(self._id)) {
             self.invalidate("username", "username currently available");
             next(new Error("username currently available"));
         }

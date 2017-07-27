@@ -1,0 +1,71 @@
+<div class="ui container">
+  <div class="ui row no-padding as2g-header-row">
+    <div class="six wide column">
+      <h1 class="ui header page-header">User Registration</h1>
+    </div>
+  </div>
+  <div class="ui row no-padding">
+    <div class="sixteen wide column">
+      <div class="ui divider"></div>
+    </div>
+  </div>
+  <drone-comm-resend-verification (okBtnClick)="navigate()" (resendBtnClick)="resendEmailVerification()"
+                                  #resendVerifyEmailModal></drone-comm-resend-verification>
+  <form class="ui form" id="contact_form" method="post" role="form" (ngSubmit)="register()">
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="username">User Name</label>
+        <input type="text" id="username" placeholder="username" [(ngModel)]="user.name" name="username"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="********" [(ngModel)]="user.password" name="password"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="confrimpassword">Confirm Password</label>
+        <input type="password" id="confrimpassword" placeholder="********" name="confirmpassword"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" placeholder="First Name" [(ngModel)]="profile.first_Name" name="firstname"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" placeholder="Last Name" [(ngModel)]="profile.last_Name" name="lastname"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="address">Address</label>
+        <input type="text" id="address" placeholder="Address" [(ngModel)]="profile.address" name="address"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="contactno">Contact No</label>
+        <input id="contactno" placeholder="011XXXXXXX" [(ngModel)]="profile.contact_No" name="contactno"/>
+      </div>
+    </div>
+    <div class="field">
+      <div class="eight wide  field">
+        <label for="email">Email</label>
+        <input type="text" id="email" placeholder="XXXX@XXX.com" [(ngModel)]="profile.email" name="email"/>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden">
+        <label>I agree to the Terms and Conditions</label>
+      </div>
+    </div>
+    <button type="submit" class="ui inverted teal button">Submit</button>
+  </form>
+</div>
