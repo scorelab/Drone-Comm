@@ -13,7 +13,9 @@ droneService.addDrone = function (drone, callback) {
         if (err) {
             return callback(new droneCommServiceError("Database Connection Error", err));
         }
-    })
+
+        return callback(null, {success: true});
+    });
 };
 
 module.exports = droneService;
