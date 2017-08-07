@@ -1,0 +1,71 @@
+<div class="ui container">
+  <div class="ui row no-padding as2g-header-row">
+    <div class="six wide column">
+      <h1 class="ui header page-header">Create New Drone</h1>
+    </div>
+  </div>
+  <div class="ui row no-padding">
+    <div class="sixteen wide column">
+      <div class="ui divider"></div>
+    </div>
+  </div>
+  <form class="ui form" id="contact_form" method="post" role="form" (ngSubmit)="createDrone()">
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="name">Drone Name</label>
+        <input type="text" id="name" placeholder="name" [(ngModel)]="drone.name" name="name"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="weight">Weight</label>
+        <input type="text" id="weight" placeholder="0.0" [(ngModel)]="drone.weight" name="weight"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="maxflightime">Maximum Flight Time</label>
+        <input type="text" id="maxflightime" placeholder="0" [(ngModel)]="drone.maxFightTime" name="maxflightime"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="maxcellingheight">Maximum Celling Height</label>
+        <input type="text" id="maxcellingheight" placeholder="0.0" [(ngModel)]="drone.maxCelling" name="maxcellingheight"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="satellitesystem">Satellite System</label>
+        <input id="satellitesystem" placeholder="Satellite System" [(ngModel)]="drone.satelliteSystem" name="satellitesystem"/>
+      </div>
+    </div>
+
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="cameraspectable">Camera Specification</label>
+        <drone-comm-editable-table id="cameraspectable" [tableHeaders]="tableHeaders"
+                                   [tableRows]="cameraSpecData" #cameraSpecTable></drone-comm-editable-table>
+      </div>
+    </div>
+
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="cameragimbalspectable">Gimbal Specification</label>
+       <drone-comm-editable-table id="cameragimbalspectable" [tableHeaders]="tableHeaders"
+                                  [tableRows]="cameraGimbalSpecData" #cameraGimbalSpecTable></drone-comm-editable-table>
+      </div>
+    </div>
+
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="otherspectable">Other Specification</label>
+        <drone-comm-editable-table id="otherspectable" [tableHeaders]="tableHeaders"
+                                   [tableRows]="otherSpecData" #otherSpecTable></drone-comm-editable-table>
+      </div>
+    </div>
+    <p></p>
+    <button type="submit" class="ui inverted teal button">Submit</button>
+  </form>
+</div>
+
