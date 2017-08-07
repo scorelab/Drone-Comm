@@ -1,0 +1,34 @@
+<div>
+  <table class="ui celled striped table">
+    <thead>
+    <tr>
+      <th *ngFor="let header of tableHeaders">{{header}}</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of tableRows; let i = index">
+      <td *ngFor="let value of row; let j = index">
+        <input *ngIf="editRow == i; else elseValue" type="text" id="{{tableHeaders[i]}}_edit"
+               [(ngModel)]="tableRows[i][j]" name="{{tableHeaders[i]}}_edit"/>
+        <ng-template #elseValue>{{value}}</ng-template>
+      </td>
+      <td>
+        <i *ngIf="editRow == i; else elseIcons" class="plus icon" (click)="editRow = -1"></i>
+        <ng-template #elseIcons>
+          <i class="edit icon" (click)="editRow = i"></i>
+          <i class="remove icon" (click)="removeRow(i)"></i>
+        </ng-template>
+      </td>
+    </tr>
+    <tr>
+      <td *ngFor="let header of tableHeaders; let i = index">
+        <input type="text" id="{{header}}" placeholder="{{header}}" [(ngModel)]="newRow[i]" name="{{header}}"/>
+      </td>
+      <td>
+        <i class="plus icon" (click)="addRow()"></i>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
