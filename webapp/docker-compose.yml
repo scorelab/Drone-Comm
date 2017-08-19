@@ -1,0 +1,8 @@
+version: "2.0"
+services:
+   web-inf:
+     build: . 
+     volumes:
+       - ./:/usr/src/app
+     ports:
+       - "4200:4200"
