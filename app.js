@@ -13,7 +13,7 @@ dbConnection.once('open', function () {
     console.log('Database connected.....')
 });
 
-mongoose.connect('mongodb://localhost:27017/DroneCommDB');
+mongoose.connect('mongodb://mongo:27017/DroneCommDB');
 
 var authenticationFilter = require('./app/util/auth/authenticationFilter');
 var authRoute = require('./app/route/authenticateRoute');
@@ -83,12 +83,14 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  //res.locals.message = err.message;
+  //res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+    console.log(err);
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
+    res.json(err);
 });
 
 module.exports = app;
