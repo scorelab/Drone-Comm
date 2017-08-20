@@ -39,9 +39,11 @@ export class RegisterComponent implements OnInit{
       this.submitted = true;
       this.userService.registerUser(this.profile).subscribe(
         data => {
+          this.submitted = false;
           this.toastr.success(data.json().msg, " Successfully Registered");
           this.showEmailResenderModal();
         }, error => {
+          this.submitted = false;
           this.toastr.error(error.json().msg, "Registration Failed");
         });
     }
