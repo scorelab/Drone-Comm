@@ -63,7 +63,7 @@ router.get('/resend/:name', function (req, res, next) {
 });
 
 router.get('/verify', function (req, res, next) {
-    verificationTokenService.verifyToken(req.query.id, function (err) {
+    verificationTokenService.verifyToken(req.query.id, function (err, resp) {
         if (err) {
             return next(err);
         }
