@@ -19,11 +19,39 @@ router.post('/', function (req, res, next) {
         }
 
         var resp = {
-            msg: 'Successfully add drone detail',
+            msg: 'Successfully created drone request',
             errorCode: 0
         };
         res.send(resp);
     });
+});
+
+router.put('/', function (req, res, next) {
+    droneRequestService.updateRequest(req.decoded.userId, req.body, function (err, response) {
+        if (err) {
+            return next(err);
+        }
+
+        var resp = {
+            msg: 'Successfully updated drone request',
+            errorCode: 0
+        };
+        res.send(resp);
+    });
+});
+
+router.post('/close/:id', function (req, res, next) {
+    droneRequestService.droneRequestClose(req.decoded.userId, req.params.id, function (err, result) {
+        if (err) {
+            return next(err);
+        }
+
+        var resp = {
+            msg: 'Successfully closed drone detail request',
+            errorCode: 0
+        };
+        res.send(resp);
+    })
 });
 
 router.get("/all", function (req, res, next) {
