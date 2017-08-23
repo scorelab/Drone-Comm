@@ -51,13 +51,13 @@ droneRequestDAO.search = function (userId, searchKey, callback) {
 droneRequestDAO.findById= function (id, callback) {
     DroneRequest.findOne({id: id}, function (err, request) {
         callback(err, request);
-    })
+    });
 };
 
 droneRequestDAO.getRequestByIdAndUserId = function (userId, Id, callback) {
     DroneRequest.findOne({userId: userId, id: id}, function (err, request) {
         callback(err, request);
-    })
+    });
 };
 
 droneRequestDAO.getLatestRequestId = function (userId, callback) {
