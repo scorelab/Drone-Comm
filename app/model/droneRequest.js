@@ -17,8 +17,21 @@ var droneRequestSchema = new Schema({
     title: String,
     description: String,
     location: String,
+    period: [Date],
+    date: Date,
     priceRange: [Number], //TODO add validate array is equal 2
-    areaCoordinates: [SchemaTypes.Double]
+    areaCoordinates: [SchemaTypes.Double],
+    active: {type: Boolean, default: true}
+});
+
+
+/**
+ * persist date
+ */
+userSchema.pre("save", function (next) {
+    var self = this;
+    self.date = Date.now();
+    next();
 });
 
 var droneRequest = mongoose.model('droneRequest', droneRequestSchema);

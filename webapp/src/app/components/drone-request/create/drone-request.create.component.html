@@ -1,0 +1,62 @@
+<div class="ui container">
+  <div class="ui row no-padding as2g-header-row">
+    <div class="six wide column">
+      <h1 class="ui header page-header">Open New Drone Request</h1>
+    </div>
+  </div>
+  <div class="ui row no-padding">
+    <div class="sixteen wide column">
+      <div class="ui divider"></div>
+    </div>
+  </div>
+  <form class="ui form" id="contact_form" method="post" role="form" (ngSubmit)="createDrone()">
+
+    <div class="three fields">
+      <div class="field">
+        <label for="function">Function</label>
+        <sm-select id="function" placeholder="Select Function"
+                   [(model)]="droneRequest.type" class="fluid" name="function">
+          <option>Wedding</option>
+          <option>Birthday Party</option>
+          <option>Other</option>
+        </sm-select>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="Title" [(ngModel)]="droneRequest.title" name="title"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Description" [(ngModel)]="droneRequest.description"
+                  name="description" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="location">Location</label>
+        <input type="text" id="location" placeholder="Location" [(ngModel)]="droneRequest.location" name="location"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="period">Period</label>
+        <input type="text" id="period" placeholder="Location" [(ngModel)]="droneRequest.location" name="location"/>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="pricerange">Estimation Range</label>
+        <input type="text" id="pricerange" placeholder="0.00" [(ngModel)]="droneRequest.priceRange[0]" name="pricerangefrom"/>
+        to
+        <input type="text" id="pricerangeto" placeholder="0.00" [(ngModel)]="droneRequest.priceRange[1]" name="pricerangeto"/>
+      </div>
+    </div>
+    <p></p>
+    <button type="submit" class="ui inverted teal button">Submit</button>
+  </form>
+</div>
+

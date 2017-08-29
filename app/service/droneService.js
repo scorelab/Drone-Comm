@@ -8,7 +8,8 @@ var droneDAO = require('../dao/droneDAO');
 
 droneService = {};
 
-droneService.addDrone = function (drone, callback) {
+droneService.addDrone = function (userId, drone, callback) {
+    drone.userId = userId;
     droneDAO.insert(drone, function (err) {
         if (err) {
             return callback(new droneCommServiceError("Database Connection Error", err));

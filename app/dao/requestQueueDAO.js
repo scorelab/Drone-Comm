@@ -18,7 +18,6 @@ requestQueueDAO.createQueue = function (userId) {
 
 requestQueueDAO.getQueueList = function (callback) {
     RequestQueue.find({}, 'userId', function (err, queues) {
-
         callback(err, queues);
     })
 };

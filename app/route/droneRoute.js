@@ -9,7 +9,7 @@ var droneService = require('../service/droneService');
 var router = express.Router();
 
 router.post('/', function (req, res, next) {
-    droneService.addDrone(req.body, function (err, response) {
+    droneService.addDrone(req.decoded.userId, req.body, function (err, response) {
         if (err) {
             return next(err);
         }

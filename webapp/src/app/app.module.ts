@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
@@ -13,7 +13,7 @@ import {UtilService} from "./services/util.service";
 import {AuthGuard} from "./components/auth/guards/auth.guard";
 import {LoginGuard} from "./components/auth/guards/login.guard";
 import {BaseComponent} from "./components/base/base.component";
-import { RegisterComponent } from './components/register/register.component';
+import {RegisterComponent} from './components/register/register.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastModule, ToastsManager} from "ng2-toastr";
 import {RegisterVerificationComponent} from "./components/register/resendverification/register.verification.component";
@@ -21,6 +21,10 @@ import {NgSemanticModule} from "ng-semantic/ng-semantic";
 import {VerifyComponent} from "./components/register/verify/verify.component";
 import {UserService} from "./services/user.service";
 import {DroneCreateComponent} from "./components/drone/create/drone.create.component";
+import {DroneRequestCreateComponent} from "./components/drone-request/create/drone-request.create.component";
+import {DroneService} from "./services/drone.service";
+import {EditableTableComponent} from "./components/common/editable-table/editable-table.component";
+import {DroneRequestCardComponent} from "./components/drone-request/card/drone-request.card.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import {DroneCreateComponent} from "./components/drone/create/drone.create.compo
     RegisterComponent,
     RegisterVerificationComponent,
     VerifyComponent,
-    //DroneCreateComponent
+    DroneCreateComponent,
+    DroneRequestCreateComponent,
+    EditableTableComponent,
+    DroneRequestCardComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,7 @@ import {DroneCreateComponent} from "./components/drone/create/drone.create.compo
     RestService,
     UtilService,
     UserService,
+    DroneService,
     ToastsManager,
     AuthGuard,
     LoginGuard,
@@ -55,4 +63,5 @@ import {DroneCreateComponent} from "./components/drone/create/drone.create.compo
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [BaseComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
